@@ -30,7 +30,8 @@ class MinifyHelper extends AbstractHelper
 		// create minified file
 		if(! $finalMinifyName) {
 			$finalMinifyName = $this->getFilePrefix().$hash."-".uniqid().".".$this->getFilesExtension($filesToMinify);
-			file_put_contents($pathMinify."/".$finalMinifyName, Minify::combine($filesToMinify));
+			$m = new Minify(new \Minify_Cache_Null());
+			file_put_contents($pathMinify."/".$finalMinifyName, $m->combine($filesToMinify));
 		}
 
 		return $this->findWebPathMinify($file)."/".$finalMinifyName;
